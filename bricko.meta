@@ -1,0 +1,9 @@
+(
+ (license "BSD")
+
+ (category web)
+
+ (needs http-client html-parser)
+
+ (author "Samuel Breese")
+ (synopsis "Easy-to-use HTTP client and associated HTML parsing procedures."))
