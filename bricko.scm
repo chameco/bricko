@@ -1,4 +1,4 @@
-(module bricko (http-get http-post get-attr get-by-id)
+(module bricko (http-get http-post fetch-contents get-attr get-by-id)
  (import chicken scheme (srfi 1))
  (use http-client
       html-parser)
