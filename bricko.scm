@@ -1,4 +1,4 @@
-(module bricko (http-get http-post fetch-contents get-attr get-by-id)
+(module bricko (http-get http-post fetch-contents get-attr leaf-with-attr get-by-id get-by-class)
  (import chicken scheme (srfi 1))
  (use http-client
       html-parser)
@@ -68,5 +68,16 @@
          tree
          (if-call (lambda (x) (not (null? x)))
                   (filter identity (map (lambda (leaf) (get-by-id id-value leaf))
+                                        (filter (lambda (x) (and (list? x) (not (eq? (car x) '@)))) (cdr tree))))
+                  => car)))))
+
+ (define (get-by-class class-value tree)
+   (if (null? tree)
+     #f
+     (let ([root-class (get-attr 'class tree)])
+       (if (equal? root-class class-value)
+         tree
+         (if-call (lambda (x) (not (null? x)))
+                  (filter identity (map (lambda (leaf) (get-by-class class-value leaf))
                                         (filter (lambda (x) (and (list? x) (not (eq? (car x) '@)))) (cdr tree))))
                   => car))))))
